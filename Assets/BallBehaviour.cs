@@ -9,7 +9,7 @@ public class BallBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ball.rigidbody.AddForce(direction * 100);
+		ball.rigidbody.AddForce(direction * 100 * speed);
 	}
 	
 	// Update is called once per frame
@@ -18,6 +18,7 @@ public class BallBehaviour : MonoBehaviour {
 		Debug.Log(ball.rigidbody.velocity);
 	}
 
+	// Legacy methods - ideally the physics engine will handle reflections
 	void OnCollision (Collision collision) {
 		Debug.Log("Collision");
 		direction = Bounce(direction);
