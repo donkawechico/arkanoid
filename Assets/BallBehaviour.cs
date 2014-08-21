@@ -9,19 +9,20 @@ public class BallBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ball.rigidbody.AddForce(direction * 100 * speed);
+		//ball.rigidbody.AddForce(direction * 100 * speed);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//ball.transform.position += direction * Time.deltaTime * speed;
-		Debug.Log(ball.rigidbody.velocity);
+		ball.transform.position += direction * Time.deltaTime * speed;
+		//Debug.Log(ball.rigidbody.velocity);
 	}
 
 	// Legacy methods - ideally the physics engine will handle reflections
-	void OnCollision (Collision collision) {
+	void OnCollisionEnter (Collision collision) {
 		Debug.Log("Collision");
-		direction = Bounce(direction);
+		ContactPoint[] contact = collision.contacts;
+		direction = Vector3.Reflect(direction, contact[0].normal);
 	}
 
 	Vector3 Bounce (Vector3 reflection) {
